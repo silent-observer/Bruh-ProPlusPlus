@@ -9,7 +9,7 @@ p = (1, 2)
 ```
 Language is dynamic typed, so you don't have to declare all the types. There are also are blocks:
 ```
-b = block at (1, 2) "$a^2+b^2 = c^2$"
+b = block at (1, 2) "a^2+b^2 = c^2"
 ```
 Yes, it supports LaTeX math. Block is the same as point except that it has dimensions too and 
 can contain text. You can specify size exactly:
@@ -60,7 +60,7 @@ Yes, indentation matters, this is Python-like syntax
 ### Path expressions
 - [ ] `--`
 - [ ] `|-` + `-|`
-- [ ] `--cycle`
+- [ ] `-- cycle`
 - [ ] `->` + `<-` + `<->`
 - [ ] `..`
 - [ ] `rectangle`
@@ -68,7 +68,7 @@ Yes, indentation matters, this is Python-like syntax
     - [ ] `rectangle around <block>`
 - [ ] `circle`
     - [ ] `circle <center> : <radius>`
-    - [ ] `circle from <point> around <center>`
+    - [ ] `circle <point> around <center>`
     - [ ] `circle around <block>`
 - [ ] `arc`
     - [ ] `arc <center> : <radius> : <from angle> : <to angle>`
@@ -79,8 +79,7 @@ Yes, indentation matters, this is Python-like syntax
     - [ ] `ellipse around <block>`
 ### Misc
 - [ ] Color expression
-    - [ ] `#`
-    - [ ] `RGB`
+    - [ ] `hex`
 ### Special variables
 - [ ] `pen`
     - [ ] `color`
