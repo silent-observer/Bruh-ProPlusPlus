@@ -95,3 +95,34 @@ Yes, indentation matters, this is Python-like syntax
 - [ ] `draw <path>`
 - [ ] `fill <path>`
 - [ ] `filldraw <path>`
+
+## Grammar
+```ebnf
+expression = mult-expr, {("+" | "-"), mult-expr};
+mult-expr = paren-expr, {("*" | "/"), paren-expr};
+paren-expr = atom-expr | "(", expression, ")";
+atom-expr = number-symbol | id-symbol | vector-expr
+          | path-expr | list-expr | block-expr;
+
+vector-expr = "$", "(", expression, {",", expression}, ")";
+path-expr = "~", {path-component}, "~";
+path-component = paren-expr | line-op, paren-expr | "--", "cycle"
+               | "rectangle", ["around"], paren-expr
+               | "circle", ( paren-expr, ":", paren-expr
+                           | paren-expr, "around", paren-expr
+                           | "around", paren-expr )
+               | "arc", paren-expr, ":", paren-expr,
+                        ("around", paren-expr | ":", paren-expr [":", paren-expr])
+               | "ellipse", (paren-expr, ":", paren-expr, ":", paren-expr | "around", paren-expr);
+line-op = "--" | ".." | "-|" | "|-" | "->" | "<-" | "<->";
+list-expr = "[" [expression, {",", expression}] "]";
+block-expr = "block", "at", paren-expression,
+             ["with", ("size" | "paddings"), paren-expression],
+             [":", string-symbol];
+
+statement = assign-stat | command-stat | for-stat | newline-symbol;
+assign-stat = ["$", ["*"]], id-symbol, "=", expression, newline-symbol;
+command-stat = ("draw" | "fill" | "filldraw"), expression, newline-symbol;
+for-stat = "for", id-symbol, "in", expression, ":", newline-symbol, block;
+block = indent-symbol, {statement}, dedent-symbol;
+```
