@@ -5,46 +5,46 @@ Vector graphics description language (don't ask about the name)
 
 The main object in the language is a point. It consists of 2 coordinates: x and y, and is defined as
 ```
-p = (1, 2)
+p = $(1, 2)
 ```
 Language is dynamic typed, so you don't have to declare all the types. There are also are blocks:
 ```
-b = block at (1, 2) "a^2+b^2 = c^2"
+b = block at $(1, 2): "a^2+b^2 = c^2"
 ```
 Yes, it supports LaTeX math. Block is the same as point except that it has dimensions too and 
 can contain text. You can specify size exactly:
 ```
-b = block at p with size (10, 20)
+b = block at p with size $(10, 20)
 ```
 Or add "paddings" as you would with CSS:
 ```
-b = block at p with paddings (2, 5): $a^2+b^2 = c^2$
+b = block at p with paddings $(2, 5): $a^2+b^2 = c^2$
 ```
 You can also specify paths:
 ```
-path1 = ~ p -- (1, 3) -> (2, 3)
+path1 = ~ p -- $(1, 3) -> $(2, 3) ~
 ```
 To actually draw anything you can use commands. There are also special variables starting with `$` and `$*`:
 ```
 $pen = [red, thick]
 $filler = [blue]
-draw ~ (0, 0) rectangle (2, 2)
+draw ~ $(0, 0) rectangle $(2, 2) ~
 filldraw path1
 $*pen = [red, thick]
-draw ~ circle p : 10
+draw ~ circle p : 10 ~
 draw rectangle around b
 ```
 `$*` means that the variable is set only for the next graphic command
 For positioning you can use vector arithmetic:
 ```
-a = (1, 2)
-b = (3, 4)
+a = $(1, 2)
+b = $(3, 4)
 c = (a + b) / 2
 ```
 There are also foreach loops:
 ```
 for p in [p, b.center, b.top, (10, 20)]:
-    draw ~ (-1, -1) -- p
+    draw ~ $(-1, -1) -- p ~
 ```
 Yes, indentation matters, this is Python-like syntax
 
