@@ -2,7 +2,7 @@ from strutils import spaces
 
 type
   AstNode* = ref object of RootObj
-    line, pos, index: int
+    line*, pos*, index*: int
   StatementNode* = ref object of AstNode
   ExpressionNode* = ref object of AstNode
 
@@ -78,7 +78,7 @@ method toString(n: AssignNode, indent: int): string =
   if n.isOneTime: result &= "*"
   result &= n.varName & " = " & n.val.toString(indent) & "\n"
 method toString(n: CommandNode, indent: int): string =
-  spaces(indent * 4) & $n.kind & " " & n.val.toString(indent)
+  spaces(indent * 4) & $n.kind & " " & n.val.toString(indent) & "\n"
 method toString(n: ForNode, indent: int): string =
   result = spaces(indent * 4) & "for " & n.varName & " in " & n.list.toString(indent) & ":\n"
   for s in n.body:
@@ -125,3 +125,4 @@ method toString(n: BlockExprNode, indent: int): string =
     of BlockWithSize: result &= " with size " & n.vector.toString()
     of BlockWithPadding: result &= " with padding " & n.vector.toString()
   if n.text != "": result &= ": \"" & n.text & "\""
+proc `$`*(n: AstNode): string {.inline.} = n.toString(0)
