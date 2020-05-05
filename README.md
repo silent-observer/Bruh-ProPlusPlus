@@ -46,7 +46,7 @@ There are also foreach loops:
 for p in [p, b.center, b.top, (10, 20)]:
     draw ~ $(-1, -1) -- p ~
 ```
-Yes, indentation matters, this is Python-like syntax
+Yes, indentation matters, this is Python like syntax
 
 ## Available commands
 ### Point/vector expressions
@@ -98,29 +98,29 @@ Yes, indentation matters, this is Python-like syntax
 
 ## Grammar
 ```ebnf
-expression = mult-expr, {("+" | "-"), mult-expr};
-mult-expr = paren-expr, {("*" | "/"), paren-expr};
-paren-expr = atom-expr | "(", expression, ")";
-atom-expr = number-symbol | id-symbol | vector-expr
-          | path-expr | list-expr | block-expr;
+expression = mult expr, {("+" | "-"), mult expr};
+mult expr = paren expr, {("*" | "/"), paren expr};
+paren expr = atom expr | "(", expression, ")";
+atom expr = number symbol | id symbol | vector expr
+          | path expr | list expr | block expr;
 
-vector-expr = "$", "(", expression, {",", expression}, ")";
-path-expr = "~", {path-component}, "~";
-path-component = paren-expr | line-op, paren-expr | "--", "cycle"
-               | "rectangle", ["around"], paren-expr
-               | "circle", ["around"], paren-expr
-               | "arc", paren-expr,
-                    ("around", paren-expr | ":", paren-expr, [":", paren-expr])
-               | "ellipse", (paren-expr, ":", paren-expr | "around", paren-expr);
-line-op = "--" | ".." | "-|" | "|-" | "->" | "<-" | "<->";
-list-expr = "[" [expression, {",", expression}] "]";
-block-expr = "block", "at", paren-expression,
-             ["with", ("size" | "paddings"), paren-expression],
-             [":", string-symbol];
+vector expr = "$", "(", expression, {",", expression}, ")";
+path expr = "~", {path component}, "~";
+path component = paren expr | line op, paren expr | "--", "cycle"
+               | "rectangle", ["around"], paren expr
+               | "circle", ["around"], paren expr
+               | "arc", paren expr,
+                    ("around", paren expr | ":", paren expr, [":", paren expr])
+               | "ellipse", (paren expr, ":", paren expr | "around", paren expr);
+line op = "--" | ".." | "-|" | "|-" | "->" | "<-" | "<->";
+list expr = "[" [expression, {",", expression}] "]";
+block expr = "block", "at", paren expression,
+             ["with", ("size" | "paddings"), paren expression],
+             [":", string symbol];
 
-statement = assign-stat | command-stat | for-stat | newline-symbol;
-assign-stat = ["$", ["*"]], id-symbol, "=", expression, newline-symbol;
-command-stat = ("draw" | "fill" | "filldraw"), expression, newline-symbol;
-for-stat = "for", id-symbol, "in", expression, ":", newline-symbol, block;
-block = indent-symbol, {statement}, dedent-symbol;
+statement = assign stat | command stat | for stat | newline symbol;
+assign stat = ["$", ["*"]], id symbol, "=", expression, newline symbol;
+command stat = ("draw" | "fill" | "filldraw"), expression, newline symbol;
+for stat = "for", id symbol, "in", expression, ":", newline symbol, block;
+block = indent symbol, {statement}, dedent symbol;
 ```
