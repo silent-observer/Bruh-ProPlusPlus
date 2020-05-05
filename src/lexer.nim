@@ -42,13 +42,21 @@ proc lexSymbol(l: var Lexer): Token =
       if c in {'-', '>', '|'}: l.index.inc
     of '<': 
       l.index.inc
-      if c in {'-', '='}: l.index.inc
+      if c == '-':
+        l.index.inc
+        if c == '>':
+          l.index.inc
+      elif c == '=': l.index.inc
     of '>':
       l.index.inc
       if c == '=': l.index.inc
     of '.':
       l.index.inc
       if c == '.': l.index.inc
+    of '|':
+      l.index.inc
+      if c != '-': raise l.newLexerError("\"|\" is invalid!")
+      l.index.inc
     else: discard
   l.pos += l.index - startIndex
   Token(kind: Symbol, symbol: l.input[startIndex ..< l.index]).addInfo(l)
@@ -160,3 +168,4 @@ proc lex*(input: string): seq[Token] =
     result.add t
   for i in 1 ..< lexer.indents.len:
     result.add Token(kind: Dedent).addInfo(lexer)
+  result.add Token(kind: End).addInfo(lexer)

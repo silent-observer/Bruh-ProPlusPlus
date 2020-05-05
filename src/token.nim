@@ -1,6 +1,14 @@
 type 
   TokenKind* {.pure.} = enum
-    Id, Symbol, Number, String, Keyword, NewLine, Indent, Dedent, End
+    Id = "identifier",
+    Symbol = "symbol",
+    Number = "number",
+    String = "string",
+    Keyword = "keyword",
+    NewLine = "newline",
+    Indent = "more indentation",
+    Dedent = "less indentation",
+    End = "end of source file"
   KeywordKind* {.pure.} = enum
     Block = "block", At = "at", With = "with", Size = "size", Padding = "padding",
     Cycle = "cycle", Around = "around", Rectangle = "rectangle", Circle = "circle",
