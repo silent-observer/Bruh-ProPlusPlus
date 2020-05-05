@@ -43,7 +43,7 @@ c = (a + b) / 2
 ```
 There are also foreach loops:
 ```
-for p in [p, b.center, b.top, (10, 20)]:
+for p in [p, b, (10, 20)]:
     draw ~ $(-1, -1) -- p ~
 ```
 Yes, indentation matters, this is Python like syntax
