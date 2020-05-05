@@ -2,7 +2,7 @@ type
   TokenKind* {.pure.} = enum
     Id, Symbol, Number, String, Keyword, NewLine, Indent, Dedent, End
   KeywordKind* {.pure.} = enum
-    Block = "block", At = "at", With = "with", Size = "size", Paddings = "paddings",
+    Block = "block", At = "at", With = "with", Size = "size", Padding = "padding",
     Cycle = "cycle", Around = "around", Rectangle = "rectangle", Circle = "circle",
     Arc = "arc", Ellipse = "ellipse", For = "for", In = "in",
     Draw = "draw", Fill = "fill", FillDraw = "filldraw"
